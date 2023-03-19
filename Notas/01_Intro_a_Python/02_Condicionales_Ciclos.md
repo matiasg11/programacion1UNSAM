@@ -31,11 +31,11 @@ Notá que cuando decimos "un valor" hablamos de una gran diversidad de objetos. 
 ```python
 >>> c
 32
->>> 
+>>>
 
 ```
 
-Durante este curso muchas veces mostraremos el comportamiento del intérprete como aquí arriba. _No es sólo para que lo veas._ La idea es que lo corrás vos misme mientras lées estas notas. ¡Probá  variantes! No es la lectura pasiva de este texto lo que vale, sino tu propia experiencia y tus dedos en el teclado.
+Durante este curso muchas veces mostraremos el comportamiento del intérprete como aquí arriba. _No es sólo para que lo veas._ La idea es que lo corrás vos misme mientras lées estas notas. ¡Probá variantes! No es la lectura pasiva de este texto lo que vale, sino tu propia experiencia y tus dedos en el teclado.
 
 ### Python distingue mayúsculas de minúsculas
 
@@ -62,15 +62,14 @@ NameError: name 'nombRe' is not defined
 
 ("Error de nomenclatura: el nombre 'nombRe' no está definido")
 
-Es importante que trates de entender estos mensajes. Programar es un diálogo entre el intérprete y vos. No tomes el mensaje de error como un simple "no funciona". En ese mensaje está la semilla de la solución. 
+Es importante que trates de entender estos mensajes. Programar es un diálogo entre el intérprete y vos. No tomes el mensaje de error como un simple "no funciona". En ese mensaje está la semilla de la solución.
 
-Los comandos de Python siempre se escriben con minúsculas. 
+Los comandos de Python siempre se escriben con minúsculas.
 
 ```python
 >>> WHILE x < 0:   # ERROR
 >>> while x < 0:   # OK
 ```
-
 
 ### Tipos de datos
 
@@ -81,12 +80,13 @@ Las variables pueden contener una gran diversidad de tipos de datos. Dos variabl
 >>> altura = 442.0         # Punto flotante
 >>> altura = 'Muy, muy alto' # Cadena de caracteres (string)
 ```
+
 No es necesario declarar el tipo de una variable (como sí lo es en otros lenguajes). El intérprete deduce el tipo según el valor del lado derecho de la asignación, y este tipo puede cambiar durante la vida de la variable.
 
 Notá que asignamos distintos tipos de valores a la misma variable. Decimos que Python tiene tipado dinámico, es decir, el tipo percibido por el intérprete puede cambiar a lo largo de la ejecución dependiendo del valor asignado a la variable.
 
-
 ### Booleanos (bool)
+
 Uno de los tipos de datos más importes es el booleano.
 
 Las variables booleanas se llaman así en honor al lógico inglés [George Boole](https://es.wikipedia.org/wiki/George_Boole). Pueden tomar dos valores: `True` o `False` (verdadero o falso).
@@ -110,7 +110,7 @@ False
 False
 ```
 
-El operador `==` devuelve True si ambos lados son iguales, y devuelve False si no lo son. No confundirlo con `=` que es usado para asignaciones. 
+El operador `==` devuelve True si ambos lados son iguales, y devuelve False si no lo son. No confundirlo con `=` que es usado para asignaciones.
 
 Internamente, los booleanos son evaluados como enteros con valores `1`, `0`.
 
@@ -121,7 +121,7 @@ Internamente, los booleanos son evaluados como enteros con valores `1`, `0`.
 >>>     print('d es False')
 ```
 
-*No escribas código basado en esta convención. Sería bastante extraño.*
+_No escribas código basado en esta convención. Sería bastante extraño._
 
 ### Palabras reservadas
 
@@ -134,6 +134,7 @@ Habrás notado que `True` y `False` se escriben con mayúscula. Son _palabras re
     ^
 SyntaxError: cannot assign to True
 ```
+
 ("Error sintáctico: no puedo asignar [un valor] a True")
 
 Podés ver la lista completa de palabras reservadas si la pedís. `True` y `False` no son las únicas.
@@ -142,7 +143,6 @@ Podés ver la lista completa de palabras reservadas si la pedís. `True` y `Fals
 >>> import keyword
 >>> keyword.kwlist
 ```
-
 
 ### Imprimir en pantalla
 
@@ -179,11 +179,9 @@ Si le pasás más de un valor al `print`, los imprime separándolos con espacios
 >>> print('Hola mundo', end='\n\t')
 ```
 
-
-
 ### Condicionales
 
-El comando `if` permite que ciertos fragmentos de un programa se ejecuten o no según el resultado de una condición. A esto lo llamamos _ejecución condicional_. 
+El comando `if` permite que ciertos fragmentos de un programa se ejecuten o no según el resultado de una condición. A esto lo llamamos _ejecución condicional_.
 
 ```python
 >>> una = 3
@@ -207,7 +205,7 @@ El comando `else` define un bloque que sólo se ejecutará si la condición del 
 Gana una
 ```
 
-_Nota_: si este fragmento de código no funciona como esperás, revisá los valores guardados en `una` y `otra`. 
+_Nota_: si este fragmento de código no funciona como esperás, revisá los valores guardados en `una` y `otra`.
 
 Podés realizar más comparaciones agregando condiciones extras con `elif`.
 
@@ -222,9 +220,9 @@ Podés realizar más comparaciones agregando condiciones extras con `elif`.
 ...     print('Empate!')
 ```
 
-El comando `elif` viene de *else, if* y puede traducirse como "si no se cumplió la condición del *if* anterior, verificá si se cumple la siguiente" .
+El comando `elif` viene de _else, if_ y puede traducirse como "si no se cumplió la condición del _if_ anterior, verificá si se cumple la siguiente" .
 
-Las variables booleanas pueden reemplazar a una _condición_ en un condicional. 
+Las variables booleanas pueden reemplazar a una _condición_ en un condicional.
 
 ```python
 >>> variable_booleana = False # probá True también
@@ -248,7 +246,6 @@ Recordemos que una variable booleana puede almacenar el resultado de una compara
 ...     print('Empate!')
 ```
 
-
 ### Ciclos
 
 Para ejecutar una porción de código reiteradamente mientras ciertas condiciones se cumplan podés usar el comando `while`. El `while` se comporta como un `if` mas un _ciclo_ (bucle o _loop_) que vuelve a ejecutar el bloque indentado si la condición del `while` sigue valiendo `True`.
@@ -261,7 +258,6 @@ Para ejecutar una porción de código reiteradamente mientras ciertas condicione
 ```
 
 Los comandos indentados debajo del `while` se van a a ejecutar mientras la condición del `while` sea verdadera (`True`). Cuando esta condición sea falsa, ese bloque indentado no se ejecutará más y la ejecución continuará con el código que sigue.
-
 
 ### Indentación
 
@@ -282,15 +278,15 @@ La indentación agrupa los comandos siguientes como las operaciones a repetir:
      print(una)
 ```
 
-Como el comando  `print()` del final no está indentado, no pertenece al ciclo. 
+Como el comando `print()` del final no está indentado, no pertenece al ciclo.
 
 ### Indentando adecuadamente
 
 Algunas recomendaciones sobre cómo indentar:
 
-* Usá espacios y no el tabulador.
-* Usá 4 espacios por cada nivel.
-* Usá un editor de textos que entienda que estás escribiendo en Python.
+-   Usá espacios y no el tabulador.
+-   Usá 4 espacios por cada nivel.
+-   Usá un editor de textos que entienda que estás escribiendo en Python.
 
 El único requisito del intérprete de Python es que la indentación dentro de un mismo bloque sea consistente. Por ejemplo, esto es un error:
 
@@ -300,9 +296,6 @@ El único requisito del intérprete de Python es que la indentación dentro de u
 ...         print(una)
 ```
 
-Ahora que sabés como manejar  variables, condicionales, y ciclos en Python en la próxima sección vamos a usarlos para escribir algunos programas simples.
-
-
+Ahora que sabés como manejar variables, condicionales, y ciclos en Python en la próxima sección vamos a usarlos para escribir algunos programas simples.
 
 [Contenidos](../Contenidos.md) \| [Anterior (1 Python)](01_Python.md) \| [Próximo (3 Un primer programa)](03_Hello_world.md)
-
