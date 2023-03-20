@@ -31,3 +31,10 @@ for c in cadena:
         count = count+1
 
 print(count, "o en el texto")
+
+# 1.20 f-strings
+
+nombre = "Matías"
+equipo = "Boca Juniors"
+edad = 30
+print(f'Soy {nombre}, tengo {edad} años y soy de {equipo}')
