@@ -41,3 +41,5 @@ while deuda > 0:
 
 print("Total pagado:", round(pagado, 2))
 print("Meses:", round(pagos))
+
+print(f'En total se pagó ${pagado:0.2f} a lo largo de {pagos} meses')
