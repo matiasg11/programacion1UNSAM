@@ -1,16 +1,19 @@
+import csv
 
 
 def costo_camion(nombre_archivo):
-    with open(nombre_archivo, 'rt') as f:
-        headers = next(f).split(",")
-        costo_total = 0
-        for line in f:
-            row = line.split(",")
-            try:
-                costo_total = costo_total + int(row[1])*float(row[2])
-            except ValueError:
-                print(f'Falta precio para {row[0]}')
-            # print(row)
+    f = open(nombre_archivo, 'rt')
+    rows = csv.reader(f)
+    headers = next(rows)
+    costo_total = 0
+    for row in rows:
+        try:
+            costo_total = costo_total + int(row[1])*float(row[2])
+        except ValueError:
+            print(f'Falta precio para {row[0]}')
+
+        # print(row)
+    f.close()
     return costo_total
 
 
