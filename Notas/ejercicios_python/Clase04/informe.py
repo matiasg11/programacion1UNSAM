@@ -7,12 +7,13 @@ def leer_camion(nombre_archivo):
         rows = csv.reader(f)
         headers = next(rows)
         camion = []
-        for i, row in enumerate(rows):
+        for i, row in enumerate(rows, start=1):
             try:
+                record = dict(zip(headers, row))
                 obj = {}
-                ncajones = int(row[1])
-                precio = float(row[2])
-                obj["nombre"] = row[0]
+                ncajones = int(record["cajones"])
+                precio = float(record["precio"])
+                obj["nombre"] = record["nombre"]
                 obj["cajones"] = ncajones
                 obj["precio"] = precio
                 camion.append(obj)
@@ -55,3 +56,19 @@ for item in camion_list:
 margen = bruto - costo
 print(
     f"Costo del camión: ${costo:0.2f}\nVenta del camión: ${bruto:0.2f}\nMargen neto: ${margen:0.2f}")
+
+
+precios_venta = leer_precios('../Data/precios.csv')
+camion_list = leer_camion('../Data/fecha_camion.csv')
+
+bruto = 0
+costo = 0
+margen = 0
+
+for item in camion_list:
+    costo += item["cajones"]*item["precio"]
+    bruto += item["cajones"]*precios_venta[item["nombre"]]
+
+margen = bruto - costo
+print(
+    f"Costo del (fecha_)camión: ${costo:0.2f}\nVenta del (fecha_)camión: ${bruto:0.2f}\nMargen neto: ${margen:0.2f}")
