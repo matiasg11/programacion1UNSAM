@@ -59,23 +59,39 @@ def calcular_ganancias(camion, precios):
 
 
 def hacer_informe(camion, precios):
-
-    print("Ejercicio 4.8:\n")
+    lista = []
     for item in camion:
-        r = ((item["nombre"], item["cajones"], precios[item["nombre"]],
-             precios[item["nombre"]]-item["precio"]))
-        print(r)
-
-    print("\nEjercicio 4.9:\n")
-
-    for item in camion:
-        print(
-            f'{item["nombre"]:>10s} {item["cajones"]:>10d}  ${precios[item["nombre"]]:7.2f} ${precios[item["nombre"]]-item["precio"]:>6.2f}')
+        lista.append((item["nombre"], item["cajones"], item["precio"],
+                      precios[item["nombre"]]-item["precio"]))
+    return lista
 
 
 precios_venta = leer_precios('../Data/precios.csv')
 camion_list = leer_camion('../Data/camion.csv')
 camion_fecha = leer_camion('../Data/fecha_camion.csv')
+
+lista = hacer_informe(camion_list, precios_venta)
+
+print("Ejercicio 4.8:\n")
+for item in lista:
+    print(item)
+
+print("\nEjercicio 4.9:\n")
+
+for item in lista:
+    # print(
+    #     f'{item["nombre"]:>10s} {item["cajones"]:>10d}  ${precios[item["nombre"]]:7.2f} ${precios[item["nombre"]]-item["precio"]:>6.2f}')
+    print('%10s %10d %10.2f %10.2f' % item)
+
+print("\nOtro ejercicio 4.9 \n")
+headers = ('Nombre', 'Cajones', 'Precio', 'Cambio')
+print('%10s %10s %10s %10s' % headers)
+print(f'{"":->10s} {"":->10s} {"":->10s} {"":->10s}')
+for (nombre, cajones, precio, cambio) in lista:
+    # print(f'{nombre:>10s} {cajones:>10d} ${precio:>10.2f} {cambio:>10.2f}')
+    print('{:>10s} {:>10d} {:>10.2f} {:>10.2f}'.format(
+        nombre, cajones, precio, cambio))
+
 
 # calcular_ganancias(camion_list, precios_venta)
 # calcular_ganancias(camion_fecha, precios_venta)
