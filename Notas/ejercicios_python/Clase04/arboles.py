@@ -59,15 +59,26 @@ parques = ["GENERAL PAZ", "ANDES, LOS", "CENTENARIO"]
 archivo = "../Data/arbolado-en-espacios-verdes.csv"
 
 
-print('%20s %20s %20s' % tuple(parques))
-print(f'{"":<20s} {"":<20s} {"":<20s}')
+print('%25s %25s %25s' % tuple(parques))
+print(f'{"":-<25s} {"":-<25s} {"":-<25s}')
 lista_ejemplares = []
 for parque in parques:
     lista_arb = leer_parque(archivo, parque)
     ejemplares = contar_ejemplares(lista_arb)
     lista_ejemplares.append(ejemplares.most_common(5))
-print(lista_ejemplares)
+# print(lista_ejemplares)
 
-# for i in range(0, 2):
-#     for j in range(0, 4):
-#         print(lista_ejemplares[j])
+ordenada = []
+for i in range(0, 5):
+    sub = []
+    for j in range(0, 3):
+        sub.append((lista_ejemplares[j][i][0], lista_ejemplares[j][i][1]))
+    ordenada.append(sub)
+
+for i in range(len(ordenada)):
+    renglon = []
+    for m in range(len(ordenada[i])):
+        for g in range(0, 2):
+            renglon.append(ordenada[i][m][g])
+    print('%25s:%3d|%25s:%3d|%25s:%3d' % tuple(renglon))
+# print(renglon)
