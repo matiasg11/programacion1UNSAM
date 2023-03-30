@@ -31,11 +31,11 @@ lista_arboles = leer_parque(
 def especies(lista_arboles):
     lista_especies = []
     for arbol in lista_arboles:
-        lista_especies = arbol["nombre_com"]
+        lista_especies.append(arbol["nombre_com"])
 
     dict_especies = set(lista_especies)
-    print(len(lista_especies))
-    return lista_especies
+    print((dict_especies))
+    return dict_especies
 
 
 especies(lista_arboles)
