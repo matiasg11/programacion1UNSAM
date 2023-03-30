@@ -20,7 +20,7 @@ def leer_parque(nombre_archivo, parque):
             # Debugger
             #  print(record)
             count += 1
-    print(count)
+    # print(count)
     return lista
 
 
@@ -34,7 +34,7 @@ def especies(lista_arboles):
         lista_especies.append(arbol["nombre_com"])
 
     dict_especies = set(lista_especies)
-    print((dict_especies))
+    # print((dict_especies))
     return dict_especies
 
 
@@ -44,11 +44,30 @@ especies(lista_arboles)
 def contar_ejemplares(lista_arboles):
     total_por_especie = Counter()
     lista_especies = especies(lista_arboles)
-    for nombre_com in lista_especies:
-        total_por_especie[nombre_com] += 1
+    for nombre in lista_especies:
+        for arbol in lista_arboles:
+            if arbol["nombre_com"] == nombre:
+                total_por_especie[nombre] += 1
 
-    print(total_por_especie)
+    # print(total_por_especie)
     return total_por_especie
 
 
 contar_ejemplares(lista_arboles)
+
+parques = ["GENERAL PAZ", "ANDES, LOS", "CENTENARIO"]
+archivo = "../Data/arbolado-en-espacios-verdes.csv"
+
+
+print('%20s %20s %20s' % tuple(parques))
+print(f'{"":<20s} {"":<20s} {"":<20s}')
+lista_ejemplares = []
+for parque in parques:
+    lista_arb = leer_parque(archivo, parque)
+    ejemplares = contar_ejemplares(lista_arb)
+    lista_ejemplares.append(ejemplares.most_common(5))
+print(lista_ejemplares)
+
+# for i in range(0, 2):
+#     for j in range(0, 4):
+#         print(lista_ejemplares[j])
