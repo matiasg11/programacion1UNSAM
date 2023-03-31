@@ -102,9 +102,39 @@ def obtener_alturas(lista_arboles, especie):
         print(
             f'El promedio es {sum/len(arboles_filtrados):.2f} y el más alto mide {max:.2f}')
         promedio = sum/len(arboles_filtrados)
-        return arboles_filtrados, max, sum, promedio
+        # return arboles_filtrados, max, sum, promedio
     else:
         print("No hay árboles de esa especie en el parque")
 
 
-obtener_alturas(lista_arboles, "Fresno americano")
+especie = "Jacarandá"
+
+for parque in parques:
+    lista = leer_parque(archivo, parque)
+    obtener_alturas(lista, especie)
+
+# obtener_alturas(lista_arboles, "Fresno americano")
+
+
+def obtener_inclinaciones(lista_arboles, especie):
+    arboles_filtrados = list(filter(
+        lambda lista_arboles: lista_arboles["nombre_com"] == especie, lista_arboles))
+
+    if len(arboles_filtrados) != 0:
+        arboles_ = []
+        max = 0
+        for arbol in arboles_filtrados:
+            arboles_.append(arbol["inclinacio"])
+            if int(arbol["inclinacio"]) > max:
+                max = int(arbol["inclinacio"])
+        print(
+            f'El árbol más inclinado lo está {max:.2f}°')
+    else:
+        print("No hay árboles de esa especie en el parque")
+
+
+especie = "Falso Guayabo"
+for parque in parques:
+    lista = leer_parque(archivo, parque)
+    obtener_alturas(lista, especie)
+    obtener_inclinaciones(lista, especie)
