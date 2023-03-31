@@ -85,4 +85,26 @@ def mas_comunes_en_parque(parques, archivo):
     # print(renglon)
 
 
-mas_comunes_en_parque(parques, archivo)
+# mas_comunes_en_parque(parques, archivo)
+
+def obtener_alturas(lista_arboles, especie):
+
+    arboles_filtrados = list(filter(
+        lambda lista_arboles: lista_arboles["nombre_com"] == especie, lista_arboles))
+    # print(len(arboles_filtrados))
+    max = 0
+    sum = 0
+    if len(arboles_filtrados) != 0:
+        for arbol in arboles_filtrados:
+            sum += int(arbol["altura_tot"])
+            if int(arbol["altura_tot"]) > max:
+                max = int(arbol["altura_tot"])
+        print(
+            f'El promedio es {sum/len(arboles_filtrados):.2f} y el más alto mide {max:.2f}')
+        promedio = sum/len(arboles_filtrados)
+        return arboles_filtrados, max, sum, promedio
+    else:
+        print("No hay árboles de esa especie en el parque")
+
+
+obtener_alturas(lista_arboles, "Fresno americano")
