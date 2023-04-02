@@ -1,5 +1,5 @@
 def propagar(lista):
-    lista_nueva = lista
+    lista_nueva = lista.copy()
     lista_previa = []
     while lista_nueva != lista_previa:
         lista_previa = lista_nueva.copy()
