@@ -7,3 +7,6 @@ dobles = [x*2 for x in nums]
 copia = [x for x in nums]
 
 copia.pop()
+
+
+camion = leer_camion('../Data/camion.csv')
