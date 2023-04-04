@@ -29,3 +29,5 @@ for gente in range(20, 30):
     dic[gente] = (dupl/1000)
 
 print(dic)
+
+# A partir del 23 la mayoría de las veces da un valor > 0.5
