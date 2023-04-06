@@ -15,10 +15,15 @@ def resumen_temp(n):
     promedio = sum([a for a in lista])/n
     if len(lista) % 2 != 0:
         mediana = (lista[int((n-1)/2)] + lista[int((n+1)/2)])/2
+        cuartil1 = (lista[int((n-1)/4)] + lista[int((n+1)/4)])/2
+        cuartil2 = (lista[int(3*(n-1)/4)] + lista[int(3*(n+1)/4)])/2
     else:
         mediana = lista[int(n/2)]
-    print(f'{maximo:0.2f}, {minimo:0.2f}, {promedio:0.2f}, {mediana:0.2f}')
-    return (maximo, minimo, promedio, mediana)
+        cuartil1 = lista[int(n/4)]
+        cuartil2 = lista[int(3*n/4)]
+
+    print(f'{maximo:0.2f}, {minimo:0.2f}, {promedio:0.2f}, {cuartil1:0.2f} {mediana:0.2f} {cuartil2:0.2f}')
+    return (maximo, minimo, promedio, cuartil1, mediana, cuartil2)
 
 
-resumen_temp(10)
+resumen_temp(100)
