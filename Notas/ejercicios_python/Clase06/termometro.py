@@ -1,10 +1,12 @@
 import random
+import numpy as np
 
 
 def medir_temp(n):
     lista = []
     for i in range(n):
         lista.append(random.normalvariate(37.5, 0.2))
+    np.save('../Data/temperaturas', lista)
     return lista
 
 
@@ -26,4 +28,5 @@ def resumen_temp(n):
     return (maximo, minimo, promedio, cuartil1, mediana, cuartil3)
 
 
-resumen_temp(100)
+# resumen_temp(100)
+medir_temp(999)
