@@ -1,6 +1,7 @@
 import csv
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def leer_arboles(nombre_archivo):
@@ -63,9 +64,54 @@ altos = [(float(arbol['altura_tot']))
 diametros = [(float(arbol['diametro']))
              for arbol in arboleda if arbol['nombre_com'] == "Jacarandá"]
 
+hyd2 = altura_y_diametro(arboleda, "Jacarandá")
+hyd = [(altos[i], diametros[i]) for i in range(0, len(altos))]
 
-plt.hist(altos, bins=25)
-plt.show()
+# plt.hist(altos, bins=25)
+# plt.ylabel("Cantidad (árboles)")
+# plt.xlabel("Alto (m)")
+# plt.title("Histograma de alturas para Jacarandás")
+# plt.show()
+
+# print(hyd == hyd2)
+
+
+def crear_ejes(lista_de_pares):
+    x_y = np.array(lista_de_pares)
+    x = x_y[:, 0]
+    y = x_y[:, 1]
+    return x, y
 
 
 def scatter_hd(lista_de_pares):
+    h, d = crear_ejes(lista_de_pares)
+    plt.xlabel("Diametro (cm)")
+    plt.ylabel("Alto (m)")
+    plt.title("Relación diámetro-alto para Jacarandás")
+    plt.xlim(0, 100)
+    plt.ylim(0, 30)
+    plt.scatter(d, h, c="b", alpha=0.5)
+    plt.show()
+
+
+# scatter_hd(hyd)
+
+# %%
+
+def medidas_de_especies(especies, arboleda):
+    colors = ["r", "g", "y"]
+    for especie in especies:
+        alt_diam = altura_y_diametro(arboleda, especie)
+        y, x = crear_ejes(alt_diam)
+        plt.scatter(x, y, alpha=(0.35-0.15*(especies.index(especie))), label=especie,
+                    color=colors[(especies.index(especie))])
+
+
+medidas_de_especies(especies, arboleda)
+plt.xlabel("Diametro (cm)")
+plt.ylabel("Alto (m)")
+plt.title("Relación diámetro-alto para Eucaliptos, Palos Borrachos yJacarandás")
+plt.xlim(0, 200)
+plt.ylim(0, 50)
+plt.legend()
+plt.show()
