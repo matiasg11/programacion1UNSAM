@@ -9,4 +9,17 @@ n = 670
 m = 5
 
 # Album
-album = np.zeros(n)
+
+
+def crear_album(numero_figuritas):
+    return np.zeros(numero_figuritas)
+
+
+album = crear_album(n)
+
+
+def album_incompleto(A):
+    return (0 in A)
+
+
+print(album_incompleto(album))
