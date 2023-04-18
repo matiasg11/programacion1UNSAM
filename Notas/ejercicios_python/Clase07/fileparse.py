@@ -23,7 +23,8 @@ def parse_csv(nombre_archivo, select=None, types=None, has_headers=True):
 
         registros = []
         for row in rows:
-            if not row:    # Saltea filas sin datos
+            # Saltea filas sin datos
+            if not row or ("" in row):
                 continue
             if indices:
                 row = [row[index] for index in indices]
