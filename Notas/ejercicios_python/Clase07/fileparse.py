@@ -33,7 +33,7 @@ def parse_csv(nombre_archivo, select=None, types=None, has_headers=True):
             if has_headers:
                 registro = dict(zip(headers, row))
             else:
-                registro = (row[i] for i in len(row))
+                registro = tuple([row[i] for i in range(len(row))])
             registros.append(registro)
 
     return registros
