@@ -39,7 +39,11 @@ def donde_insertar(lista, x, verbose=False):
             medio = (izq + der) // 2
             pos = medio
             if lista[medio] == x:
-                return pos+1    # elemento encontrado!
+                return pos
+            if lista[der] == x:
+                return der
+            if lista[izq] == x:
+                return izq     # elemento encontrado!
             if lista[medio] > x:
                 der = medio - 1  # descarto mitad derecha
             else:               # if lista[medio] < x:
