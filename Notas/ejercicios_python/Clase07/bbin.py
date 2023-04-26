@@ -105,18 +105,58 @@ def insertar(lista, x):
         return pos, comps
 
 
-print(insertar([0, 2, 4, 6], -2))
-print(insertar([0, 2, 4, 6], -1))
-print(insertar([0, 2, 4, 6], 0))
-print(insertar([0, 2, 4, 6], 1))
-print(insertar([0, 2, 4, 6], 2))
-print(insertar([0, 2, 4, 6], 3))
-print(insertar([0, 2, 4, 6], 4))
-print(insertar([0, 2, 4, 6], 5))
-print(insertar([0, 2, 4, 6], 6))
-print(insertar([0, 2, 4, 6], 7))
-print(insertar(list(range(0, 1000, 2)), 500))
-print(insertar(list(range(0, 1000, 2)), 125))
-print(insertar(list(range(0, 1000, 2)), 343))
-print(insertar(list(range(0, 1000, 2)), 919))
-print(insertar(list(range(0, 1000, 2)), 713))
+# print(insertar([0, 2, 4, 6], -2))
+# print(insertar([0, 2, 4, 6], -1))
+# print(insertar([0, 2, 4, 6], 0))
+# print(insertar([0, 2, 4, 6], 1))
+# print(insertar([0, 2, 4, 6], 2))
+# print(insertar([0, 2, 4, 6], 3))
+# print(insertar([0, 2, 4, 6], 4))
+# print(insertar([0, 2, 4, 6], 5))
+# print(insertar([0, 2, 4, 6], 6))
+# print(insertar([0, 2, 4, 6], 7))
+# print(insertar(list(range(0, 1000, 2)), 500))
+# print(insertar(list(range(0, 1000, 2)), 125))
+# print(insertar(list(range(0, 1000, 2)), 343))
+# print(insertar(list(range(0, 1000, 2)), 919))
+# print(insertar(list(range(0, 1000, 2)), 713))
+
+def busqueda_binaria_comps(lista, x, verbose=False):
+    '''Búsqueda binaria
+    Precondición: la lista está ordenada
+    Devuelve -1 si x no está en lista;
+    Devuelve p tal que lista[p] == x, si x está en lista
+    '''
+    if verbose:
+        print(f'[DEBUG] izq |der |medio')
+    pos = -1  # Inicializo respuesta, el valor no fue encontrado
+    izq = 0
+    der = len(lista) - 1
+    comps = 0
+    while izq <= der:
+        comps += 1
+        medio = (izq + der) // 2
+        if verbose:
+            print(f'[DEBUG] {izq:3d} |{der:>3d} |{medio:3d}')
+        if lista[medio] == x:
+            pos = medio     # elemento encontrado!
+        if lista[medio] > x:
+            der = medio - 1  # descarto mitad derecha
+        else:               # if lista[medio] < x:
+            izq = medio + 1  # descarto mitad izquierda
+    return pos, comps
+
+
+def busqueda_secuencial_comps(lista, x):
+    '''Si x está en la lista devuelve el índice de su primera aparición, 
+    de lo contrario devuelve -1. Además devuelve la cantidad de comparaciones
+    que hace la función.
+    '''
+    comps = 0  # inicializo en cero la cantidad de comparaciones
+    pos = -1
+    for i, z in enumerate(lista):
+        comps += 1  # sumo la comparación que estoy por hacer
+        if z == x:
+            pos = i
+            break
+    return pos, comps
