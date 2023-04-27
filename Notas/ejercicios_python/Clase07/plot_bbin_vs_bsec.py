@@ -12,7 +12,7 @@ def generar_lista(n, m):
 
 
 def generar_elemento(m):
-    return random.randint(0, m-1)
+    return random.randint(0, m - 1)
 
 
 def experimento_secuencial_promedio(lista, m, k):
@@ -34,15 +34,11 @@ def experimento_binario_promedio(lista, m, k):
     comps_prom = comps_tot / k
     return comps_prom
 
+
 # print(experimento_secuencial_promedio(lista, m, k))
 
 
-n = 100
-m = 1000
-k = 1000
-
-
-def datos_secuencial(cant_datos):
+def datos_secuencial(cant_datos, m, k):
     largos = np.arange(cant_datos) + 1
     comps_promedio = np.zeros(cant_datos)
     for i, n in enumerate(largos):
@@ -51,7 +47,7 @@ def datos_secuencial(cant_datos):
     return largos, comps_promedio
 
 
-def datos_binaria(cant_datos):
+def datos_binaria(cant_datos, m, k):
     largos = np.arange(cant_datos) + 1
     comps_promedio = np.zeros(cant_datos)
     for i, n in enumerate(largos):
@@ -61,17 +57,19 @@ def datos_binaria(cant_datos):
 
 
 def graficar_bbin_vs_bseq(m, k):
-    secuencial = datos_secuencial(256)
-    binaria = datos_binaria(256)
-    plt.plot(secuencial[0], secuencial[1], label='Búsqueda Secuencial')
-    plt.plot(binaria[0], binaria[1], label='Búsqueda Binaria')
+    secuencial = datos_secuencial(256, m, k)
+    binaria = datos_binaria(256, m, k)
+    plt.plot(secuencial[0], secuencial[1], label="Búsqueda Secuencial")
+    plt.plot(binaria[0], binaria[1], label="Búsqueda Binaria")
 
     plt.xlabel("Largo de la lista")
     plt.ylabel("Cantidad de comparaciones")
     plt.ylim(0, 20)
+    plt.xlim(0, 20)
+
     plt.title("Complejidad de la Búsqueda")
     plt.legend()
     plt.show()
 
 
-graficar_bbin_vs_bseq(m, k)
+graficar_bbin_vs_bseq(1000, 1000)
