@@ -12,7 +12,7 @@ def parse_csv(
     if select and not has_headers:
         raise RuntimeError("Para seleccionar, necesito encabezados")
 
-    with open(nombre_archivo) as f:
+    with open(nombre_archivo, "rt", encoding="utf-8") as f:
         rows = csv.reader(f)
 
         # Declara los índices por única vez
@@ -41,17 +41,17 @@ def parse_csv(
                         print(f"Fila {i+1}: Motivo: {e}")
                     continue
 
-            if has_headers:
-                registro = dict(zip(headers, row))
-            else:
-                registro = tuple([row[i] for i in range(len(row))])
-            registros.append(registro)
+        if has_headers:
+            registro = dict(zip(headers, row))
+        else:
+            registro = dict(zip(row[0], [row[i] for i in range(len(row))]))
+        registros.append(registro)
 
     return registros
 
 
-camion = parse_csv("../Data/missing.csv", types=[str, int, float])
-print(camion)
+# camion = parse_csv("../Data/missing.csv", types=[str, int, float])
+# print(camion)
 
-camion2 = parse_csv("../Data/missing.csv", types=[str, int, float], silence_errors=True)
-print(camion)
+# camion2 = parse_csv("../Data/missing.csv", types=[str, int, float], silence_errors=True)
+# print(camion)

@@ -19,7 +19,7 @@ def rebotes(altura_i, reb=10):
 
 
 altura_inicial = 100
-if __name__ == __main__:
+if __name__ == "__main__":
     if len(sys.argv) > 2:
         rebotes(int(sys.argv[1]), int(sys.argv[2]))
     elif len(sys.argv) > 1:

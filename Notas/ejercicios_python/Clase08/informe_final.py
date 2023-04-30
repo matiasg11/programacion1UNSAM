@@ -6,6 +6,7 @@ Created on Tue Sep  7 12:34:08 2021
 @author: mcerdeiro
 """
 # tabla_informe.py
+import sys
 import csv
 import fileparse
 
@@ -22,7 +23,7 @@ def leer_camion(nombre_archivo):
 
 
 def leer_precios(nombre_archivo):
-    precios = fileparse.parse_csv(nombre_archivo)
+    precios = fileparse.parse_csv(nombre_archivo, has_headers=False)
     return precios
 
 
@@ -32,7 +33,8 @@ def leer_precios(nombre_archivo):
 def hacer_informe(camion, precios):
     lista = []
     for lote in camion:
-        precio_venta = precios["nombre"]
+        print(lote["nombre"])
+        precio_venta = precios[precios.index(lote["nombre"])][1]
         cambio = precio_venta - lote["precio"]
         t = (lote["nombre"], lote["cajones"], lote["precio"], cambio)
         lista.append(t)
@@ -63,6 +65,10 @@ def informe_camion(nombre_archivo_camion, nombre_archivo_precios):
 # informe_camion('../Data/camion.csv', '../Data/precios.csv')
 
 
-if __name__ == __main__:
+def f_principal():
     if len(sys.argv) > 2:
-        rebotes(int(sys.argv[1]), int(sys.argv[2]))
+        informe_camion((sys.argv[1]), (sys.argv[2]))
+
+
+if __name__ == "__main__":
+    f_principal()
