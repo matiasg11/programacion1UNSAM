@@ -42,7 +42,7 @@ def datos_secuencial(cant_datos, m, k):
     largos = np.arange(cant_datos) + 1
     comps_promedio = np.zeros(cant_datos)
     for i, n in enumerate(largos):
-        lista = generar_lista(n, m)  # genero lista de largo n
+        lista = generar_lista(n - 1, m)  # genero lista de largo n
         comps_promedio[i] = experimento_secuencial_promedio(lista, m, k)
     return largos, comps_promedio
 
@@ -72,4 +72,4 @@ def graficar_bbin_vs_bseq(m, k):
     plt.show()
 
 
-graficar_bbin_vs_bseq(1000, 1000)
+graficar_bbin_vs_bseq(100, 100)
