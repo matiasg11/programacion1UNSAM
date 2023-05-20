@@ -20,4 +20,5 @@ def ejercicio9_1():
 
     plt.show()
 
-ejercicio9_1()
+# ejercicio9_1()
+
