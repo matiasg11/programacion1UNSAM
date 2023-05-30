@@ -2,7 +2,7 @@
 
 # 7.3 Módulos
 
-En esta sección vamos a introducir conceptos que nos permiten crear módulos y trabajar con programas cuyas partes están repartidas en múltiples archivos. 
+En esta sección vamos a introducir conceptos que nos permiten crear módulos y trabajar con programas cuyas partes están repartidas en múltiples archivos.
 
 ### Módulos y la instrucción `import`
 
@@ -15,7 +15,8 @@ def grok(a):
 def spam(b):
     ...
 ```
-El comando `import` carga un módulo y lo *ejecuta*. 
+
+El comando `import` carga un módulo y lo _ejecuta_.
 
 ```python
 # programa.py
@@ -28,8 +29,7 @@ b = foo.spam('Hola')
 
 ### Namespaces
 
-Se puede decir que un módulo es una colección de valores asignados a nombres. A ésto se lo llama un *namespace* (espacio de nombres). Es el contexto en el cual esos nombres existen: todas las variables globales y las funciones definidas en un módulo *pertenecen* a ese módulo. Una vez importado, el nombre del módulo se usa como un prefijo al nombrar esas variables y funciones. Por eso se llama un namespace.
-
+Se puede decir que un módulo es una colección de valores asignados a nombres. A ésto se lo llama un _namespace_ (espacio de nombres). Es el contexto en el cual esos nombres existen: todas las variables globales y las funciones definidas en un módulo _pertenecen_ a ese módulo. Una vez importado, el nombre del módulo se usa como un prefijo al nombrar esas variables y funciones. Por eso se llama un namespace.
 
 ```python
 import foo
@@ -43,9 +43,8 @@ El nombre del módulo es el nombre del archivo que lo contiene.
 
 ### Definiciones globales
 
-El espacio de nombres contiene todo aquello definido con visibilidad *global*.
+El espacio de nombres contiene todo aquello definido con visibilidad _global_.
 Supongamos dos módulos diferentes que definen cada uno una variable `x`:
-
 
 ```python
 # foo.py
@@ -66,6 +65,7 @@ Entonces hay dos definiciones de `x` y cada una refiere a una variable diferente
 **Los módulos están aislados uno de otro.**
 
 ### Módulos como entornos
+
 Los módulos crean un entorno que contiene a todo el código definido ahí.
 
 ```python
@@ -76,18 +76,18 @@ def grok(a):
     print(x)
 ```
 
-Incluso las variables *globales* son visibles sólo dentro del módulo en que fueron definidas (el mismo archivo).
+Incluso las variables _globales_ son visibles sólo dentro del módulo en que fueron definidas (el mismo archivo).
 Cada módulo es un pequeño universo.
 
 ### Ejecución de módulos
 
-Cuando importás un módulo se ejecutan *todas* las instrucciones en ese módulo, una tras otra, hasta llegar al final del archivo. 
-El *namespace* del módulo está poblado por todas las funciones y variables globales cuya definición siga vigente al terminar de ejecutar el módulo. 
-Si existen comandos que se ejecutan en el *namespace* global del módulo y hacen tareas como crear archivos, imprimir mensajes, etc., se van a ejecutar al importar el módulo.
+Cuando importás un módulo se ejecutan _todas_ las instrucciones en ese módulo, una tras otra, hasta llegar al final del archivo.
+El _namespace_ del módulo está poblado por todas las funciones y variables globales cuya definición siga vigente al terminar de ejecutar el módulo.
+Si existen comandos que se ejecutan en el _namespace_ global del módulo y hacen tareas como crear archivos, imprimir mensajes, etc., se van a ejecutar al importar el módulo.
 
-### El comando `import as` 
+### El comando `import as`
 
-En el momento de importar un módulo, podés cambiar el nombre que le asignás dentro del contexto en que lo importás. 
+En el momento de importar un módulo, podés cambiar el nombre que le asignás dentro del contexto en que lo importás.
 
 ```python
 import math as m
@@ -114,11 +114,11 @@ def rectangular(r, theta):
 
 Esta forma de importar te permite usar partes de un módulo sin necesidad de especificar la pertenencia a un módulo como prefijo. Es útil para nombres (funciones o variables) que se usan mucho.
 
-Si usás `from math import *` vas a importar *todas* las funciones y constantes del módulo `math` como si estuvieran definidas localmente. No es coveniente hacer esto ya que se pierden las ventajas que da trabajar con namespaces.
+Si usás `from math import *` vas a importar _todas_ las funciones y constantes del módulo `math` como si estuvieran definidas localmente. No es coveniente hacer esto ya que se pierden las ventajas que da trabajar con namespaces.
 
-### Notas sobre `import` 
+### Notas sobre `import`
 
-Estas distintas formas de usar `import` *no modifican* el funcionamiento de un módulo.
+Estas distintas formas de usar `import` _no modifican_ el funcionamiento de un módulo.
 
 ```python
 import math
@@ -128,18 +128,18 @@ import math as m
 from math import cos, sin
 ...
 ```
+
 Más específicamente, `import` siempre ejecuta el módulo completo, y los módulos siguen siendo pequeños entornos aislados.
 El comando `import módulo as` sólo cambia el nombre local del módulo.
 El comando `from math import cos, sin`, aunque sólo hace accesibles las funciones `sin` y `cos`, de todos modos carga todo el módulo y lo ejecuta. La única diferencia es que copia los nombres de las funciones `sin` y `cos` al namespace local.
 
-
 ### Carga de módulos
 
-Cada módulo es cargado y ejecutado sólo *una* vez.
+Cada módulo es cargado y ejecutado sólo _una_ vez.
 
-*Observación: Repetir la instrucción `import` sólo devuelve una referencia al módulo ya cargado.*
+_Observación: Repetir la instrucción `import` sólo devuelve una referencia al módulo ya cargado._
 
-La variable `sys.modules` es un diccionario de los módulos cargados. 
+La variable `sys.modules` es un diccionario de los módulos cargados.
 
 ```python
 >>> import sys
@@ -147,17 +147,18 @@ La variable `sys.modules` es un diccionario de los módulos cargados.
 ['copy_reg', '__main__', 'site', '__builtin__', 'encodings', 'encodings.encodings', 'posixpath', ...]
 >>>
 ```
-**Precaución:**
-Si cambiás el código de un módulo y lo volvés a cargar sucede algo que suele causar confusión hasta que lo entendés: 
-Dado que existe la lista de módulos cargados `sys.modules`, un pedido de cargar un módulo por segunda vez siempre devolverá el módulo ya cargado, aún si el módulo fue modificado, si se trata de una versión nueva de ese módulo y si el archivo en disco ha sido modificado. Es posible usar `reload(módulo)` pero sólo en ciertos casos. El método que asegura que el módulo se vuelva a cargar es cerrar y volver a abrir el intérprete de Python. 
 
+**Precaución:**
+Si cambiás el código de un módulo y lo volvés a cargar sucede algo que suele causar confusión hasta que lo entendés:
+Dado que existe la lista de módulos cargados `sys.modules`, un pedido de cargar un módulo por segunda vez siempre devolverá el módulo ya cargado, aún si el módulo fue modificado, si se trata de una versión nueva de ese módulo y si el archivo en disco ha sido modificado. Es posible usar `reload(módulo)` pero sólo en ciertos casos. El método que asegura que el módulo se vuelva a cargar es cerrar y volver a abrir el intérprete de Python.
 
 ## Ejercicios
 
 Para estos ejercicios que involucran módulos, es de suma importancia que te asegures de que estás ejecutando Python en el directorio adecuado.
 
 ### Ejercicio 7.7: Importar módulos
-En el [Ejercicio 7.3](../07_Organizacion/02_Funciones.md#ejercicio-73-parsear-un-archivo-csv) creamos una función llamada `parse_csv()` para parsear el contenido de archivos de datos en formato CSV. Ahora vamos a ver cómo usar esa función en otros programas. 
+
+En el [Ejercicio 7.3](../07_Organizacion/02_Funciones.md#ejercicio-73-parsear-un-archivo-csv) creamos una función llamada `parse_csv()` para parsear el contenido de archivos de datos en formato CSV. Ahora vamos a ver cómo usar esa función en otros programas.
 
 Empezá por copiarte los archivos `rebotes.py` e `hipoteca.py` a la carpeta de ejercicios de esta clase. Los vamos a importar.
 
@@ -216,6 +217,7 @@ Importá sólo la función para evitar escribir el nombre del módulo:
 ```
 
 ### Ejercicio 7.8: Usemos tu módulo
+
 Retomemos la versión de `informe_funciones.py` del [Ejercicio 7.2](../07_Organizacion/01_Scripts.md#ejercicio-72-crear-una-funcion-de-alto-nivel-para-la-ejecucion-del-programa) que produce un informe como éste:
 
 ```
@@ -237,6 +239,7 @@ Al final, deberías obtener exactamente el mismo resultado que al principio.
 Este archivo lo vas a tener que entregar al final de la clase. Por favor comentá la línea que llama a la función `informe_camion()` de manera que tu archivo contenga solamente definiciones de funciones y lo podamos evaluar automáticamente.
 
 ### Ejercicio 7.9: Un poco más allá
+
 El programa `costo_camion.py` lee, mediante una función llamada `costo_camion()` los datos de un camión y calcula su costo. La última versión que deberías tener de este archivo es la del [Ejercicio 4.4](../04_Datos/02_Secuencias.md#ejercicio-44-la-funcion-zip). Copiá el archivo `costo_camion.py` al directorio de ejercicios de la clase actual. Deberías poder importarlo y usarlo así:
 
 ```python
@@ -245,6 +248,7 @@ El programa `costo_camion.py` lee, mediante una función llamada `costo_camion()
 47671.15
 >>>
 ```
+
 Ahora, modificá el archivo `costo_camion.py` para que la función `costo_camion()` utilice la función `leer_camion()` del programa `informe_funciones.py`. Para esto, el archivo `costo_camion.py` debe importar el módulo `informe_funciones`, y dentro de la función `costo_camion()` debe haber una llamada a `informe_funciones.leer_camion()`.
 
 ### Comentario
@@ -252,6 +256,4 @@ Ahora, modificá el archivo `costo_camion.py` para que la función `costo_camion
 Al terminar este ejercicio tenés tres programas.
 `fileparse.py` contiene una función para parsear datos de archivos CSV en general, `parse_csv()`. Por otra parte, `informe_funciones.py` que produce un bello informe, y que contiene las funciones `leer_camion()` y `leer_precios()`. Finalmente, `costo_camion.py` calcula el costo de un camión, pero usando la función `leer_camion()` que fue escrita para el programa que genera el informe.
 
-
 [Contenidos](../Contenidos.md) \| [Anterior (2 Funciones)](02_Funciones.md) \| [Próximo (4 Búsqueda binaria)](04_BusqBinaria.md)
-
