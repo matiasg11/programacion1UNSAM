@@ -58,6 +58,7 @@ def dias_habiles(inicio, fin, feriados):
         dia = dia + timedelta(days=1)
 
     print(habiles)
+    return habiles
 
 
 dias_habiles("26/09/2020", "11/10/2020", [])
