@@ -40,20 +40,28 @@ def extraer_datos(archivo):
     nombre_nuevo = nombre[0:-13]
     # Debugger
     print(nombre, extension, fecha, nombre_nuevo)
-    return tuple((nombre_nuevo, fecha, extension))
+    return tuple((nombre_nuevo + extension, fecha, extension))
 
 
-# def procesar_nombre(fname):
+def procesar_nombre(nombre_viejo, nombre_nuevo):
+    os.rename(nombre_viejo, nombre_nuevo)
+
 
 for archivo in lista_archivos_png:
     (nombre_nuevo, fecha, extension) = extraer_datos(archivo)
     mod_fecha_edicion(
         os.path.normpath(os.path.join(archivo["root"], archivo["name"])), fecha
     )
-
-
-# Cambiar el nombre del archivo
-
-# Mover archivo a la carpeta creada
+    # Cambiar el nombre del archivo
+    # Mover archivo a la carpeta creada
+    procesar_nombre(
+        os.path.normpath(os.path.join(archivo["root"], archivo["name"])),
+        os.path.normpath(os.path.join(directorio, carpeta_a_crear, nombre_nuevo)),
+    )
 
 # Borrar subcarpetas vacías
+for carpeta in os.walk(directorio):
+    try:
+        os.rmdir(carpeta)
+    except:
+        continue
