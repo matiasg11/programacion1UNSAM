@@ -14,3 +14,6 @@ class Lote:
             n = self.cajones
         self.cajones -= n
         # print(self.cajones)
+
+    def __repr__(self):
+        return f"Lote({self.nombre}, {self.cajones}, {self.precio})"

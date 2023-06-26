@@ -6,6 +6,7 @@
 # %% ejercicio 7.7
 import fileparse
 import lote
+import formato_tabla
 
 
 def leer_camion(nombre_archivo):
@@ -36,25 +37,48 @@ def hacer_informe(camion, precios):
     return lista
 
 
-def imprimir_informe(informe):
-    print("    Nombre    Cajones     Precio     Cambio")
-    print("---------- ---------- ---------- ----------")
-    for nombre, cajones, precio, cambio in informe:
-        precio = f"${precio}"
-        print(f"{nombre:>10s} {cajones:>10d} {precio:>10s} {cambio:>10.2f}")
+# def imprimir_informe(informe):
+#     print("    Nombre    Cajones     Precio     Cambio")
+#     print("---------- ---------- ---------- ----------")
+#     for nombre, cajones, precio, cambio in informe:
+#         precio = f"${precio}"
+#         print(f"{nombre:>10s} {cajones:>10d} {precio:>10s} {cambio:>10.2f}")
 
 
-def informe_camion(nombre_archivo_camion, nombre_archivo_precios):
+def imprimir_informe(data_informe, formateador):
+    """
+    Imprime una tabla prolija desde una lista de tuplas
+    con (nombre, cajones, precio, diferencia)
+    """
+    formateador.encabezado(["Nombre", "Cantidad", "Precio", "Cambio"])
+    for nombre, cajones, precio, cambio in data_informe:
+        rowdata = [nombre, str(cajones), f"{precio:0.2f}", f"{cambio:0.2f}"]
+        formateador.fila(rowdata)
+
+
+def informe_camion(nombre_archivo_camion, nombre_archivo_precios, formato="txt"):
+    """
+    Crea un informe con la carga de un camión
+    a partir de archivos camion y precio.
+    El formato predeterminado de la salida es txt
+    Alternativas: csv o html
+    """
     camion = leer_camion(nombre_archivo_camion)
-    lista_precios = leer_precios(nombre_archivo_precios)
-    precios = dict(lista_precios)
-    informe = hacer_informe(camion, precios)
-    imprimir_informe(informe)
+    precios = dict(leer_precios(nombre_archivo_precios))
+
+    data_informe = hacer_informe(camion, precios)
+    formateador = formato_tabla.crear_formateador(formato)
+
+    imprimir_informe(data_informe, formateador)
 
 
 # %%
 def f_principal(argumentos):
-    informe_camion(argumentos[1], argumentos[2])
+    if len(argumentos) > 3:
+        informe_camion(argumentos[1], argumentos[2], argumentos[3])
+
+    else:
+        informe_camion(argumentos[1], argumentos[2])
 
 
 if __name__ == "__main__":
